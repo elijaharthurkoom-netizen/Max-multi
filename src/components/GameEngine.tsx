@@ -157,76 +157,74 @@ export const GameEngine: React.FC<GameEngineProps> = ({ profile, operation, diff
   }
 
   return (
-    <div className="max-w-7xl mx-auto h-full flex flex-col gap-10">
+    <div className="max-w-7xl mx-auto h-full flex flex-col gap-6 md:gap-10">
       {/* HUD Info */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-20 px-4">
-        <div className="glass-panel px-10 py-6 flex flex-col justify-center border-l-4 border-l-indigo-500 shadow-indigo-500/5">
-           <span className="text-[10px] font-black uppercase text-indigo-400 tracking-[0.4em] mb-2">Time Remaining</span>
-           <div className={`text-5xl font-mono font-bold flex items-center gap-4 ${timeLeft < 10 ? 'text-rose-500 animate-pulse' : 'text-slate-100'}`}>
-              <Timer size={28} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 relative z-20 px-4">
+        <div className="glass-panel px-6 md:px-10 py-4 md:py-6 flex flex-col md:flex-col items-center md:items-start justify-between md:justify-center border-l-4 border-l-indigo-500 shadow-indigo-500/5">
+           <span className="text-[9px] md:text-[10px] font-black uppercase text-indigo-400 tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-2 italic">Time</span>
+           <div className={`text-3xl md:text-5xl font-mono font-bold flex items-center gap-3 ${timeLeft < 10 ? 'text-rose-500 animate-pulse' : 'text-slate-100'}`}>
+              <Timer size={20} className="md:w-7 md:h-7" />
               <span>{timeLeft}s</span>
            </div>
         </div>
 
-        <div className="glass-panel px-10 py-6 flex flex-col items-center justify-center border-b-4 border-b-amber-500 shadow-[0_20px_40px_rgba(245,158,11,0.1)]">
-           <div className="flex items-center gap-6">
-              <Zap className="text-amber-400" size={40} />
-              <div className="text-6xl font-black italic text-slate-100 tracking-tighter leading-none">{score.toLocaleString()}</div>
+        <div className="glass-panel px-6 md:px-10 py-4 md:py-6 flex flex-col items-center justify-center border-b-4 border-b-amber-500 shadow-amber-500/10">
+           <div className="flex items-center gap-4 md:gap-6">
+              <Zap className="text-amber-400" size={24} className="md:w-10 md:h-10" />
+              <div className="text-4xl md:text-6xl font-black italic text-slate-100 tracking-tighter leading-none">{score.toLocaleString()}</div>
            </div>
            {streak > 1 && (
              <motion.div 
-               initial={{ scale: 1.5, opacity: 0 }}
+               initial={{ scale: 1.2, opacity: 0 }}
                animate={{ scale: 1, opacity: 1 }}
-               className="text-[10px] font-black text-amber-500 uppercase tracking-[0.3em] mt-3 italic"
+               className="text-[8px] md:text-[10px] font-black text-amber-500 uppercase tracking-widest mt-2 italic"
              >
-               COMBOMETER: {streak}X MULTIPLIER
+               STREAK: {streak}X
              </motion.div>
            )}
         </div>
 
-        <div className="glass-panel px-10 py-6 flex flex-col justify-center items-end border-r-4 border-r-cyan-500 shadow-cyan-500/5">
-           <span className="text-[10px] font-black uppercase text-cyan-400 tracking-[0.4em] mb-2">Combat Rank</span>
-           <div className="text-5xl font-display font-black italic text-slate-100 uppercase leading-none italic">Lv.{difficulty}</div>
+        <div className="glass-panel px-6 md:px-10 py-4 md:py-6 flex flex-col items-center md:items-end justify-between md:justify-center border-r-4 border-r-cyan-500 shadow-cyan-500/5">
+           <span className="text-[9px] md:text-[10px] font-black uppercase text-cyan-400 tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-2 italic">Rank</span>
+           <div className="text-3xl md:text-5xl font-black italic text-slate-100 uppercase leading-none">Lv.{difficulty}</div>
         </div>
       </div>
 
-      <div className="flex-grow flex flex-col items-center justify-center py-10 relative px-4">
+      <div className="flex-grow flex flex-col items-center justify-center py-6 md:py-10 relative px-4">
         <AnimatePresence mode="wait">
           {problem && (
             <motion.div 
               key={problem.a + problem.b + problem.op}
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.1, opacity: 0 }}
+              exit={{ scale: 1.05, opacity: 0 }}
               className="w-full text-center"
             >
-              <div className="glass-panel p-24 mb-16 flex flex-col items-center justify-center relative overflow-hidden group shadow-2xl bg-slate-900/60 border-slate-700/50">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
-                
-                <div className="flex items-center gap-14 md:gap-28 my-10 relative z-10">
-                  <span className="text-9xl md:text-[200px] font-black text-slate-200 tabular-nums italic tracking-tighter leading-none">
+              <div className="glass-panel p-8 md:p-24 mb-8 md:mb-16 flex flex-col items-center justify-center relative shadow-2xl bg-slate-900/60 border-slate-700/50">
+                <div className="flex items-center gap-6 md:gap-28 my-6 md:my-10 relative z-10 overflow-hidden">
+                  <span className="text-6xl md:text-[200px] font-black text-slate-100 tabular-nums italic tracking-tighter leading-none">
                     {problem.a}
                   </span>
-                  <span className="text-7xl md:text-9xl font-light text-indigo-500/30">
+                  <span className="text-4xl md:text-9xl font-light text-indigo-500/40">
                     {problem.op === 'multiplication' ? '×' : '÷'}
                   </span>
-                  <span className="text-9xl md:text-[200px] font-black text-slate-200 tabular-nums italic tracking-tighter leading-none">
+                  <span className="text-6xl md:text-[200px] font-black text-slate-100 tabular-nums italic tracking-tighter leading-none">
                     {problem.b}
                   </span>
                 </div>
 
-                <div className="w-80 h-32 bg-slate-950 border-2 border-indigo-500/40 rounded-[48px] flex items-center justify-center shadow-[0_0_60px_rgba(99,102,241,0.25)] mb-10 group-hover:scale-105 transition-transform duration-500">
-                   <div className="text-6xl font-black text-indigo-400 font-mono tracking-[0.3em] animate-pulse">? ?</div>
+                <div className="w-48 h-20 md:w-80 md:h-32 bg-slate-950 border-2 border-indigo-500/40 rounded-2xl md:rounded-[48px] flex items-center justify-center shadow-indigo-500/20 mb-6 md:mb-10">
+                   <div className="text-3xl md:text-6xl font-black text-indigo-400 font-mono tracking-widest animate-pulse">? ?</div>
                 </div>
 
-                <div className="w-full max-w-xl">
-                  <div className="flex justify-between text-[11px] uppercase tracking-[0.5em] text-slate-600 mb-5 font-black italic">
-                    <span>Performance Core</span>
-                    <span>{correctCount} Targets Acquired</span>
+                <div className="w-full max-w-lg hidden md:block">
+                  <div className="flex justify-between text-[10px] uppercase tracking-[0.4em] text-slate-600 mb-4 font-black italic">
+                    <span>Performance</span>
+                    <span>{correctCount} Targets</span>
                   </div>
-                  <div className="w-full h-3 bg-slate-950 rounded-full border border-slate-800/80 overflow-hidden p-1 shadow-inner">
+                  <div className="w-full h-2 bg-slate-950 rounded-full border border-slate-800/80 overflow-hidden p-0.5">
                     <motion.div 
-                      className="h-full bg-gradient-to-r from-indigo-600 via-indigo-400 to-cyan-500 rounded-full shadow-[0_0_20px_#6366f1]" 
+                      className="h-full bg-gradient-to-r from-indigo-600 to-cyan-500 rounded-full" 
                       initial={{ width: 0 }}
                       animate={{ width: `${Math.min(100, (correctCount / 10) * 100)}%` }}
                     />
@@ -234,22 +232,21 @@ export const GameEngine: React.FC<GameEngineProps> = ({ profile, operation, diff
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-5xl mx-auto">
                 {problem.options.map((opt, i) => (
                   <motion.button
                     key={i}
-                    whileHover={{ y: -10, boxShadow: '0 25px 50px -10px rgba(99,102,241,0.4)' }}
-                    whileTap={{ scale: 0.94 }}
+                    whileHover={{ y: -5 }}
+                    whileTap={{ scale: 0.96 }}
                     onClick={() => handleAnswer(opt)}
                     className={`
-                      h-36 text-5xl font-mono font-bold rounded-[32px] border-2 transition-all shadow-2xl relative overflow-hidden group/btn
-                      ${feedback === 'correct' && opt === problem.answer ? 'bg-emerald-600 border-emerald-400 text-white shadow-emerald-900/60' : 
-                        feedback === 'wrong' && opt !== problem.answer ? 'bg-rose-600 border-rose-400 text-white shadow-rose-900/60' : 'bg-slate-900/80 border-slate-700/60 text-slate-400 hover:border-indigo-400 hover:text-white hover:bg-slate-800'}
+                      h-24 md:h-36 text-3xl md:text-5xl font-mono font-bold rounded-2xl md:rounded-[32px] border-2 transition-all shadow-xl relative overflow-hidden group/btn
+                      ${feedback === 'correct' && opt === problem.answer ? 'bg-emerald-600 border-emerald-400 text-white' : 
+                        feedback === 'wrong' && opt !== problem.answer ? 'bg-rose-600 border-rose-400 text-white' : 'bg-slate-900/80 border-slate-700/60 text-slate-400 hover:border-indigo-400 hover:text-white hover:bg-slate-800'}
                     `}
                     disabled={feedback !== null}
                   >
                     <div className="relative z-10">{opt}</div>
-                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
                   </motion.button>
                 ))}
               </div>
@@ -258,14 +255,15 @@ export const GameEngine: React.FC<GameEngineProps> = ({ profile, operation, diff
         </AnimatePresence>
       </div>
 
-      <div className="mt-8 flex justify-center pb-12">
+      <div className="mt-4 flex justify-center pb-8">
         <button 
           onClick={onCancel}
-          className="text-slate-600 font-black hover:text-indigo-400 uppercase text-[11px] tracking-[0.5em] px-12 py-5 bg-slate-950/40 rounded-full border border-slate-800/80 transition-all hover:bg-slate-900 hover:border-slate-700 shadow-2xl"
+          className="text-slate-600 font-black hover:text-indigo-400 uppercase text-[9px] md:text-[11px] tracking-widest px-8 md:px-12 py-3 md:py-4 bg-slate-950/40 rounded-full border border-slate-800/80 transition-all hover:bg-slate-900"
         >
-          Disconnect Protocol
+          Disconnect
         </button>
       </div>
+
 
       <AnimatePresence>
         {showMascot && (

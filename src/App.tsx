@@ -131,50 +131,51 @@ export default function App() {
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_-20%,#312e81,transparent_50%)] opacity-40 pointer-events-none"></div>
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_80%,#1e1b4b,transparent_40%)] opacity-30 pointer-events-none"></div>
 
-      <nav className="relative z-50 p-6 flex justify-between items-center max-w-7xl mx-auto w-full">
+      <nav className="relative z-50 p-4 md:p-6 flex justify-between items-center max-w-7xl mx-auto w-full">
         <div className="flex flex-col group cursor-pointer" onClick={() => setView('profiles')}>
-          <h1 className="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 group-hover:from-cyan-400 group-hover:to-indigo-400 transition-all duration-500">
+          <h1 className="text-xl md:text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 group-hover:from-cyan-400 group-hover:to-indigo-400 transition-all duration-500 italic">
             MATH OVERDRIVE
           </h1>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-indigo-400 font-bold opacity-80 mt-1">Status: Operational</span>
+          <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-indigo-400 font-bold opacity-60 mt-0.5">Status: Operational</span>
         </div>
         
         {currentProfile && view !== 'profiles' && (
-          <div className="flex items-center gap-4">
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] uppercase text-slate-500 font-bold tracking-widest">Active Hero</span>
-              <span className="text-xl font-bold text-slate-200 tracking-tight">{currentProfile.name}</span>
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="hidden sm:flex flex-col items-end">
+              <span className="text-[8px] md:text-[10px] uppercase text-slate-500 font-bold tracking-widest">Active Core</span>
+              <span className="text-sm md:text-xl font-bold text-slate-200 tracking-tight italic uppercase">{currentProfile.name}</span>
             </div>
-            <div className={`w-10 h-10 rounded-xl ${currentProfile.avatarColor} border border-white/20 flex items-center justify-center shadow-lg`}>
-              <div className="w-5 h-5 rounded-full border-2 border-white/50"></div>
+            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl ${currentProfile.avatarColor} border border-white/20 flex items-center justify-center shadow-lg`}>
+              <div className="w-3 h-3 md:w-5 md:h-5 rounded-full border-2 border-white/50"></div>
             </div>
           </div>
         )}
       </nav>
 
-      <main className="relative z-10 container mx-auto px-6 py-4 flex-grow">
+      <main className="relative z-10 container mx-auto px-4 md:px-6 py-2 md:py-4 flex-grow">
         <AnimatePresence mode="wait">
           <motion.div
             key={view + (db.currentProfileId || 'none')}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
           >
             {currentView()}
           </motion.div>
         </AnimatePresence>
       </main>
 
-      <footer className="relative z-10 py-8 px-6 text-[10px] text-slate-500 uppercase tracking-[0.3em] font-bold flex justify-between items-center max-w-7xl mx-auto w-full">
-        <div className="flex gap-6">
+      <footer className="relative z-10 py-6 md:py-8 px-4 md:px-6 text-[8px] md:text-[10px] text-slate-600 uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto w-full">
+        <div className="flex gap-4 md:gap-6">
           <span>Local Cache: Encrypted</span>
-          <span>Build: v2.4.1-Final</span>
+          <span>Build: v2.4.1</span>
         </div>
         <div className="flex gap-4">
-          <span className="text-indigo-500">Ready for Deployment</span>
+          <span className="text-indigo-600">Authorized Access Only</span>
         </div>
       </footer>
+
     </div>
   );
 }
