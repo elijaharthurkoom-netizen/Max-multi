@@ -68,7 +68,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ profile, sessions, onStart
                   <h3 className="text-5xl font-black text-white italic tracking-tighter uppercase leading-none">Multiply</h3>
                   <p className="text-indigo-200 text-xs font-bold uppercase tracking-[0.2em] mt-3 opacity-80">Training Grounds: Operational</p>
                 </div>
-                <div className="flex items-center gap-3 self-start bg-white/10 px-5 py-2.5 rounded-full border border-white/20 backdrop-blur-sm">
+                <div className="flex flex-wrap gap-2 mt-4 relative z-10">
+                  {['EASY', 'NORMAL', 'HARD'].map((cat, i) => (
+                    <span key={cat} className={`text-[8px] font-black px-2 py-1 rounded-md border ${i === 0 ? 'bg-indigo-400/30 border-indigo-300' : 'bg-white/5 border-white/10'}`}>{cat}</span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 self-start bg-white/10 px-5 py-2.5 rounded-full border border-white/20 backdrop-blur-sm mt-4">
                   <span className="w-2.5 h-2.5 rounded-full bg-indigo-300 animate-pulse"></span>
                   <span className="text-[10px] font-black uppercase text-indigo-100 tracking-widest">Protocol 01-A</span>
                 </div>
@@ -88,7 +93,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ profile, sessions, onStart
                   <h3 className="text-5xl font-black text-slate-100 italic tracking-tighter uppercase leading-none">Divide</h3>
                   <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.2em] mt-3 opacity-80">Logic Chamber: Synchronized</p>
                 </div>
-                <div className="flex items-center gap-3 self-start bg-slate-800/80 px-5 py-2.5 rounded-full border border-slate-700 backdrop-blur-sm">
+                <div className="flex flex-wrap gap-2 mt-4 relative z-10">
+                  {['EASY', 'NORMAL', 'HARD'].map((cat, i) => (
+                    <span key={cat} className={`text-[8px] font-black px-2 py-1 rounded-md border ${i === 2 ? 'bg-cyan-900/30 border-cyan-800' : 'bg-white/5 border-slate-800'}`}>{cat}</span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 self-start bg-slate-800/80 px-5 py-2.5 rounded-full border border-slate-700 backdrop-blur-sm mt-4">
                   <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse"></span>
                   <span className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Protocol 02-B</span>
                 </div>

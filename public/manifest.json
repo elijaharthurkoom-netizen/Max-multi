@@ -1,0 +1,17 @@
+{
+  "name": "MathBlitz: Multi-Div Hero",
+  "short_name": "MathBlitz",
+  "description": "A high-octane gamified math platform for mastering multiplication and division.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/neon/512/calculator.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

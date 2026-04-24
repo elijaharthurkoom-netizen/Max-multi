@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Timer, Zap, Trophy, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Timer, Zap, Trophy, ArrowLeft, RefreshCw, Cat } from 'lucide-react';
 import { MathProblem, Operation, Profile, GameSession } from '../types';
 
 interface GameEngineProps {
@@ -19,6 +19,7 @@ export const GameEngine: React.FC<GameEngineProps> = ({ profile, operation, diff
   const [isGameOver, setIsGameOver] = useState(false);
   const [feedback, setFeedback] = useState<'correct' | 'wrong' | null>(null);
   const [streak, setStreak] = useState(0);
+  const [showMascot, setShowMascot] = useState(false);
 
   const generateProblem = useCallback(() => {
     let a: number, b: number, ans: number;
@@ -81,7 +82,14 @@ export const GameEngine: React.FC<GameEngineProps> = ({ profile, operation, diff
       const points = 100 + (streak * 10) + (timeLeft * 2);
       setScore(prev => prev + points);
       setCorrectCount(prev => prev + 1);
-      setStreak(prev => prev + 1);
+      const newStreak = streak + 1;
+      setStreak(newStreak);
+
+      if (newStreak % 5 === 0) {
+        setShowMascot(true);
+        setTimeout(() => setShowMascot(false), 2000);
+      }
+      
       setFeedback('correct');
       setTimeout(() => {
         setFeedback(null);
@@ -258,6 +266,24 @@ export const GameEngine: React.FC<GameEngineProps> = ({ profile, operation, diff
           Disconnect Protocol
         </button>
       </div>
+
+      <AnimatePresence>
+        {showMascot && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 50 }}
+            className="fixed bottom-12 right-12 z-[100] flex flex-col items-center"
+          >
+            <div className="bg-white text-indigo-900 font-black p-4 rounded-2xl rounded-br-none mb-2 shadow-2xl border-2 border-indigo-500">
+              MEOW! YOU DID IT! 🔥
+            </div>
+            <div className="bg-indigo-600 p-4 rounded-full border-4 border-white shadow-2xl">
+              <Cat size={64} className="text-white" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
